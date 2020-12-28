@@ -39,7 +39,7 @@ function Player({ currentSong, isPlaying, setIsPlaying }) {
         <div className="playerContainer">
             <div className="playerControls__time">
                 <p>{getTime(songInfo.currentTime)}</p>
-                <input type="range" name="" id=""/>
+                <input type="range" name="" id="" min={0} max={songInfo.duration} value={songInfo.currentTime}/>
                 <p>{getTime(songInfo.duration)}</p>
             </div>
 
