@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faStepForward, faStepBackward, faPause } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,23 +9,6 @@ function Player({ audioRef, currentSong, isPlaying, setIsPlaying, setSongInfo, s
             Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2)
         )
     }
-
-    useEffect(() => {        
-        const newSongs = songs.map(s => {
-            if (s.id === currentSong.id) {
-                return {
-                    ...s, 
-                    active: true
-                }
-            } else {
-                return {
-                    ...s,
-                    active: false
-                }
-            }
-        });
-        setSongs(newSongs);
-    }, [currentSong])
 
     // Event handlers
     const playSongHandler = () => {
@@ -38,6 +21,23 @@ function Player({ audioRef, currentSong, isPlaying, setIsPlaying, setSongInfo, s
         }
     }
 
+    const activeLibraryHandler = (nextPrev) => {
+        const newSongs = songs.map(s => {
+            if (s.id === nextPrev.id) {
+                return {
+                    ...s, 
+                    active: true
+                }
+            } else {
+                return {
+                    ...s,
+                    active: false
+                }
+            }
+        });
+        setSongs(newSongs);
+    }
+
     const dragHandler = ({ target: { value } }) => {
         audioRef.current.currentTime = value;        
         setSongInfo({...songInfo, currentTime: value})
@@ -48,15 +48,18 @@ function Player({ audioRef, currentSong, isPlaying, setIsPlaying, setSongInfo, s
 
         // use modulus to calculate next and prev track
         if (direction === 'skip-forward') {
-            await setCurrentSong(songs[(currentIndex + 1) % songs.length])            
+            await setCurrentSong(songs[(currentIndex + 1) % songs.length])
+            activeLibraryHandler(songs[(currentIndex + 1) % songs.length])        
         } else if (direction === 'skip-back') {
             // why minus one, because arrays begin with zero index
             if ((currentIndex - 1) % songs.length === -1) {
                 await setCurrentSong(songs[songs.length - 1])
+                activeLibraryHandler(songs[songs.length - 1])  
                 if (isPlaying) audioRef.current.play();
                 return;
             }
             await setCurrentSong(songs[(currentIndex - 1) % songs.length])
+            activeLibraryHandler(songs[(currentIndex - 1) % songs.length]) 
         }   
 
         if (isPlaying) audioRef.current.play();
