@@ -20,16 +20,15 @@
 }
 
 .library__song-container {
+	&:not(.selected):hover {
+		background-color: rgb(222, 222, 255);
+	}
 }
 
 .song {
 	display: flex;
 	padding: 1rem 2rem;
 	cursor: pointer;
-
-	&:hover {
-		background-color: rgb(222, 222, 255);
-	}
 
 	&--description {
 		display: flex;
@@ -68,4 +67,8 @@
 	background-color: rgba(155, 155, 155, 0.5);
 	border-radius: 20px;
 	border: transparent;
+}
+
+.selected {
+	background-color: rgb(204, 213, 240);
 }
