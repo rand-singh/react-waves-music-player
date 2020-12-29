@@ -12,12 +12,46 @@
 		display: flex;
 
 		p {
-			padding: 1rem;
+			padding: 0rem 1rem;
+		}
+
+		.track {
+			background: lightsalmon;
+			width: 100%;
+			height: 1rem;
+			position: relative;
+			border-radius: 1rem;
+			overflow: hidden;
+		}
+
+		.animate-track {
+			background-color: rgb(204, 204, 204);
+			width: 100%;
+			height: 1rem;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: translateX(0%);
+			pointer-events: none;
 		}
 
 		input {
 			width: 100%;
-			padding: 1rem 0rem;
+			// padding: 1rem 0rem;
+
+			-webkit-appearance: none;
+			background-color: transparent;
+			cursor: pointer;
+
+			&:focus {
+				outline: none;
+			}
+
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				height: 16px;
+				width: 16px;
+			}
 		}
 	}
 
