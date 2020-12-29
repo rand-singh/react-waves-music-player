@@ -28,6 +28,8 @@
 }
 
 .library__song-container {
+	transition: background 0.3s ease;
+
 	&:not(.selected):hover {
 		background-color: rgb(222, 222, 255);
 	}
@@ -79,4 +81,10 @@
 
 .selected {
 	background-color: rgb(204, 213, 240);
+}
+
+@media screen and (max-width: 768px) {
+	.library {
+		width: 100%;
+	}
 }

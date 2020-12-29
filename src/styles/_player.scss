@@ -66,3 +66,13 @@
 		}
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.playerControls__time {
+		width: 90%;
+	}
+
+	.playerControls__buttons {
+		width: 65%;
+	}
+}
