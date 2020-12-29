@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faStepForward, faStepBackward, faPause } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,7 +30,16 @@ function Player({ audioRef, currentSong, isPlaying, setIsPlaying, setSongInfo, s
         <div className="playerContainer">
             <div className="playerControls__time">
                 <p>{getTime(songInfo.currentTime)}</p>
-                <input onChange={dragHandler} type="range" name="" id="" min={0} max={songInfo.duration} value={songInfo.currentTime}/>
+                <input 
+                    onChange={dragHandler} 
+                    type="range" 
+                    name="" 
+                    id="" 
+                    min={0} 
+                    max={songInfo.duration || 0} 
+                    value={songInfo.currentTime}
+                />
+
                 <p>{getTime(songInfo.duration)}</p>
             </div>
 
