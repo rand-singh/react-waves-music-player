@@ -6,7 +6,7 @@ import Nav from './components/Nav'
 
 import './styles/app.scss'
 
-import data from './utils'
+import data from './data'
 
 function App() {
   // Ref

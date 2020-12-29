@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faStepForward, faStepBackward, faPause } from '@fortawesome/free-solid-svg-icons'
+import { playAudio } from '../util'
 
 function Player({ audioRef, currentSong, isPlaying, setIsPlaying, setSongInfo, songInfo, songs, setCurrentSong, setSongs }) {
 
@@ -45,17 +46,21 @@ function Player({ audioRef, currentSong, isPlaying, setIsPlaying, setSongInfo, s
 
     const skipTrackHandler = (direction) => {
         let currentIndex = songs.findIndex((song) => song.id === currentSong.id)
+
         // use modulus to calculate next and prev track
         if (direction === 'skip-forward') {
-            setCurrentSong(songs[(currentIndex + 1) % songs.length])
+            setCurrentSong(songs[(currentIndex + 1) % songs.length])            
         } else if (direction === 'skip-back') {
             // why minus one, because arrays begin with zero index
             if ((currentIndex - 1) % songs.length === -1) {
                 setCurrentSong(songs[songs.length - 1])
+                playAudio(isPlaying, audioRef);
                 return;
             }
             setCurrentSong(songs[(currentIndex - 1) % songs.length])
-        }
+        }   
+
+        playAudio(isPlaying, audioRef);
     }
 
     return (
